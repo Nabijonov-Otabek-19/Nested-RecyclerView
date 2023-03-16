@@ -12,6 +12,8 @@ import uz.gita.nestedrecyclerview.model.ItemsData
 class ItemsAdapter(private val list: List<ItemsData>) :
     RecyclerView.Adapter<ItemsAdapter.CategoryViewHolder>() {
 
+    private var listener: ((String) -> Unit)? = null
+
     inner class CategoryViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         private val category: TextView = view.findViewById(R.id.category)
         private val listProductView: RecyclerView = view.findViewById(R.id.horizontal_rv)
@@ -19,6 +21,9 @@ class ItemsAdapter(private val list: List<ItemsData>) :
         fun bind() {
             list[adapterPosition].apply {
                 val adapter = ImageAdapter(this.items)
+                adapter.setListener {
+                    listener?.invoke(it)
+                }
                 listProductView.adapter = adapter
                 listProductView.layoutManager =
                     LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
@@ -37,5 +42,9 @@ class ItemsAdapter(private val list: List<ItemsData>) :
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         holder.bind()
+    }
+
+    fun setListener(listener: (String) -> Unit){
+        this.listener = listener
     }
 }
