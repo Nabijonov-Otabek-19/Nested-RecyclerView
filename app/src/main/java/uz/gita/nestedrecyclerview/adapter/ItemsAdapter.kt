@@ -44,7 +44,7 @@ class ItemsAdapter(private val list: List<ItemsData>) :
         holder.bind()
     }
 
-    fun setListener(listener: (String) -> Unit){
+    fun setListener(listener: (String) -> Unit) {
         this.listener = listener
     }
 }
