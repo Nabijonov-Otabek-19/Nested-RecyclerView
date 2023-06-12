@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         val list = ArrayList<ItemsData>()
 
-        for (i in 0 until 100) {
+        for (i in 0 until 20) {
             val l = ArrayList<ImageData>()
             for (j in 0 until 20) {
                 l.add(ImageData("ImageData $i$j", R.drawable.image1))
